@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 22, 2021 at 05:30 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Servidor: 127.0.0.1
+-- Tiempo de generaciÃ³n: 05-03-2022 a las 19:36:16
+-- VersiÃ³n del servidor: 10.4.21-MariaDB
+-- VersiÃ³n de PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ventaautos`
+-- Base de datos: `ventaautos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auto`
+-- Estructura de tabla para la tabla `auto`
 --
 
 CREATE TABLE `auto` (
@@ -36,7 +36,7 @@ CREATE TABLE `auto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `auto`
+-- Volcado de datos para la tabla `auto`
 --
 
 INSERT INTO `auto` (`id`, `modelo`, `placa`, `color`, `idMarca`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `auto` (`id`, `modelo`, `placa`, `color`, `idMarca`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marca`
+-- Estructura de tabla para la tabla `marca`
 --
 
 CREATE TABLE `marca` (
@@ -56,7 +56,7 @@ CREATE TABLE `marca` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `marca`
+-- Volcado de datos para la tabla `marca`
 --
 
 INSERT INTO `marca` (`id`, `nombre`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `marca` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trabajador`
+-- Estructura de tabla para la tabla `trabajador`
 --
 
 CREATE TABLE `trabajador` (
@@ -75,13 +75,13 @@ CREATE TABLE `trabajador` (
   `nombres` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `apellidoPaterno` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `apellidoMaterno` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `tipoDocumento` enum('DNI','Carnet Extranjería','Pasaporte','') COLLATE utf8_unicode_ci NOT NULL,
+  `tipoDocumento` enum('DNI','Carnet Extranjeria','Pasaporte','') COLLATE utf8_unicode_ci NOT NULL,
   `numeroDocumento` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `correo` varchar(60) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `trabajador`
+-- Volcado de datos para la tabla `trabajador`
 --
 
 INSERT INTO `trabajador` (`id`, `nombres`, `apellidoPaterno`, `apellidoMaterno`, `tipoDocumento`, `numeroDocumento`, `correo`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `trabajador` (`id`, `nombres`, `apellidoPaterno`, `apellidoMaterno`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -103,7 +103,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `clave`, `vigencia`, `idTrabajador`) VALUES
@@ -111,75 +111,75 @@ INSERT INTO `usuario` (`id`, `nombre`, `clave`, `vigencia`, `idTrabajador`) VALU
 (2, 'usuari2', '22223', b'1', 1);
 
 --
--- Indexes for dumped tables
+-- Ãndices para tablas volcadas
 --
 
 --
--- Indexes for table `auto`
+-- Indices de la tabla `auto`
 --
 ALTER TABLE `auto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idMarca` (`idMarca`);
 
 --
--- Indexes for table `marca`
+-- Indices de la tabla `marca`
 --
 ALTER TABLE `marca`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `trabajador`
+-- Indices de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idTrabajador` (`idTrabajador`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `auto`
+-- AUTO_INCREMENT de la tabla `auto`
 --
 ALTER TABLE `auto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `marca`
+-- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `trabajador`
+-- AUTO_INCREMENT de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `auto`
+-- Filtros para la tabla `auto`
 --
 ALTER TABLE `auto`
   ADD CONSTRAINT `auto_ibfk_1` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idTrabajador`) REFERENCES `trabajador` (`id`) ON UPDATE CASCADE;
